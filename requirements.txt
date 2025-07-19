@@ -1,0 +1,11 @@
+torch
+numpy
+opencv-python
+imutils
+Flask
+mysql-connector-python
+huggingface_hub
+ultralytics
+Pillow
+paddlepaddle
+paddleocr
