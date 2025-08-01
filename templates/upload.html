@@ -63,10 +63,46 @@
                         <form action="{{ url_for('upload') }}" method="post" enctype="multipart/form-data">
                             <div class="mb-3">
                                 <label for="video" class="form-label">Select Video File</label>
-                                <input type="file" class="form-control" id="video" name="video" accept="video/*" required>
+                                <input type="file" class="form-control" id="video" name="video" accept="video/*">
                             </div>
+                            <div class="mb-3">
+                                <label for="image" class="form-label">Or Select Image File</label>
+                                <input type="file" class="form-control" id="image" name="image" accept="image/*">
+                            </div>
+                            <div id="file-error" class="text-danger mb-3"></div>
                             <button type="submit" class="btn btn-primary w-100">Upload and Process</button>
                         </form>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const videoInput = document.getElementById('video');
+    const imageInput = document.getElementById('image');
+    const form = document.querySelector('form');
+    const fileError = document.getElementById('file-error');
+
+    // Clear other input when one is selected
+    videoInput.addEventListener('change', function() {
+        if (videoInput.files.length > 0) {
+            imageInput.value = '';
+        }
+    });
+
+    imageInput.addEventListener('change', function() {
+        if (imageInput.files.length > 0) {
+            videoInput.value = '';
+        }
+    });
+
+    // Form validation
+    form.addEventListener('submit', function(event) {
+        if (videoInput.files.length === 0 && imageInput.files.length === 0) {
+            fileError.textContent = 'Please select either a video or an image file.';
+            event.preventDefault();
+        } else {
+            fileError.textContent = '';
+        }
+    });
+});
+</script>
                     </div>
                 </div>
             </div>
